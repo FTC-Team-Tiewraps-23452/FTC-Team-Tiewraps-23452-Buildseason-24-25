@@ -84,7 +84,10 @@ public class TemplateTeleOP extends OpMode
      */
     @Override
     public void loop() {
-
+        double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+        double x = gamepad1.left_stick_x;
+        double rx = gamepad1.right_stick_x;
+        exampleMecanumDrivetrain.mecanumDrive(x,y,rx);
         /*
          * Execute the functions of the example subsystem based on controller input
          */
@@ -118,7 +121,6 @@ public class TemplateTeleOP extends OpMode
         ChassisSpeeds chassisSpeeds = new ChassisSpeeds(forwardSpeed, sidewaysSpeed, rotationalSpeed);
 
         //The chassisSpeeds can be used as input for the mecanumDrive function to control the drivetrain
-        exampleMecanumDrivetrain.mecanumDrive(chassisSpeeds);
 
         //In the code above, the robot will drive forward if the stick is pushed forward,
         //but the robot can also be controlled relative to the field.
@@ -138,7 +140,6 @@ public class TemplateTeleOP extends OpMode
         ChassisSpeeds chassisSpeedsFromFieldRelative = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rotationalSpeed1, exampleRobotAngle);
 
         //The ChassisSpeeds can now be used in the same way as before
-        exampleMecanumDrivetrain.mecanumDrive(chassisSpeedsFromFieldRelative);
 
         //For a tank drivetrain, its a little bit easier
         //Here, we will use the left stick for forward/backward

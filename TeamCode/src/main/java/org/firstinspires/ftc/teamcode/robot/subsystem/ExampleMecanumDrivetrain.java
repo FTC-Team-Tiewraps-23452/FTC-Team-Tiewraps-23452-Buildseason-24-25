@@ -39,10 +39,10 @@ public class ExampleMecanumDrivetrain {
          * This 'labeling' can be done on the Driver Station by clicking on the three dots
          * in the upper right corner and then going to 'Configure Robot'
          */
-        rightFront = hardwareMap.get(DcMotor.class, "right_front");
-        leftFront =  hardwareMap.get(DcMotor.class, "left_front");
-        rightBack =  hardwareMap.get(DcMotor.class, "right_back");
-        leftBack =  hardwareMap.get(DcMotor.class, "left_back");
+        rightFront = hardwareMap.get(DcMotor.class, "motor0");
+        leftFront =  hardwareMap.get(DcMotor.class, "motor1");
+        rightBack =  hardwareMap.get(DcMotor.class, "motor2");
+        leftBack =  hardwareMap.get(DcMotor.class, "motor3");
 
         /*
          * Normally a DC motors runs in the clockwise direction for positive values
@@ -71,32 +71,15 @@ public class ExampleMecanumDrivetrain {
      */
 
 
-    /**
-     * Function to make the robot drive in a certain direction (defined by x and y), while rotating.
-     * Usually, x is defined as the forwards directions and y as the sideways direction (strafing).
-     * The x, y and rotation component are all stored in the ChassisSpeed object
-     * as vxMeterPerSecond, vyMeterPerSecond and omegaRadiansPerSecond respectively.
-     *
-     * @param chassisSpeeds Object that stores the desired x, y and rotational speeds
-     */
-    public void mecanumDrive(ChassisSpeeds chassisSpeeds){
 
-        /* Here follows some math to convert the inputs to the desired motor speeds
-         * ATTENTION: this math is by no means correctly, it is just to show
-         * how a drive function could be structured
-         */
-        double rightFrontPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
-        double leftFrontPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
-        double rightBackPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
-        double leftBackPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
 
-        rightFront.setPower(rightFrontPower);
-        leftFront.setPower(leftFrontPower);
-        rightBack.setPower(rightBackPower);
-        leftBack.setPower(leftBackPower);
+    public void mecanumDrive(double x, double y, double rx){
 
+        leftFront.setPower((y + x + rx) * 0.9);
+        leftBack.setPower((y - x + rx) * 0.9);
+        rightFront.setPower((y - x - rx) * 0.9);
+        rightBack.setPower((y + x - rx) * 0.9);
     }
-
     /**
      * Stop all motors of the drivetrain
      */
@@ -105,5 +88,17 @@ public class ExampleMecanumDrivetrain {
         leftFront.setPower(0);
         rightBack.setPower(0);
         leftBack.setPower(0);
+    }
+    public void setLeftBackSpeed(double speed){
+        leftBack.setPower(speed);
+    }
+    public void setRightBackSpeed(double speed){
+        rightBack.setPower(speed);
+    }
+    public void setLeftFrontSpeed(double speed){
+        leftFront.setPower(speed);
+    }
+    public void setRightFrontSpeed(double speed){
+        rightFront.setPower(speed);
     }
 }
