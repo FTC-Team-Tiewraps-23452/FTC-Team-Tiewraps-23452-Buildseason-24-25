@@ -69,14 +69,15 @@ public class MecanumDrivetrain {
      */
 
 
+
+
+
     public void mecanumDrive(double x, double y, double rx){
-
-        leftFront.setPower(y + x + rx);
-        leftBack.setPower(y - x + rx);
-        rightFront.setPower(y - x - rx);
-        rightBack.setPower(y + x - rx);
+        leftFront.setPower((y + x + rx));
+        leftBack.setPower((y - x + rx));
+        rightFront.setPower((y - x - rx));
+        rightBack.setPower((y + x - rx));
     }
-
     /**
      * Stop all motors of the drivetrain
      */
@@ -86,16 +87,8 @@ public class MecanumDrivetrain {
         rightBack.setPower(0);
         leftBack.setPower(0);
     }
-    public void setLeftBackSpeed(double speed){
-        leftBack.setPower(speed);
-    }
-    public void setRightBackSpeed(double speed){
-        rightBack.setPower(speed);
-    }
-    public void setLeftFrontSpeed(double speed){
-        leftFront.setPower(speed);
-    }
-    public void setRightFrontSpeed(double speed){
-        rightFront.setPower(speed);
-    }
+    public void setLeftBackSpeed(double speed){leftBack.setPower(speed);}
+    public void setRightBackSpeed(double speed){rightBack.setPower(speed);}
+    public void setLeftFrontSpeed(double speed){leftFront.setPower(speed);}
+    public void setRightFrontSpeed(double speed){rightFront.setPower(speed);}
 }
