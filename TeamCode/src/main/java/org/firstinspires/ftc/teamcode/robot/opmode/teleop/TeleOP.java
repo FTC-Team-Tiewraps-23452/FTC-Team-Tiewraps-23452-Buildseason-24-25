@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
+import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
+//import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
 
 /**
  * This file is a template for an "OpMode".
@@ -35,7 +36,8 @@ public class TeleOP extends OpMode
     * This means that we will say that certain subsystems exist and give them a name,
     * but not yet create them, this will happen in the init() function.
      */
-    private MecanumDrivetrain mecanumDrivetrain;
+//    private MecanumDrivetrain mecanumDrivetrain;
+    private Lift lift;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -49,7 +51,8 @@ public class TeleOP extends OpMode
          * Create all the subsystems
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
-        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
+//        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
+        lift = new Lift(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -80,12 +83,18 @@ public class TeleOP extends OpMode
         /*
          * Execute the functions of the example subsystem based on controller input
          */
-
+        if (gamepad2.a) {
+            lift.setMotorSpeed(0.8);
+        } else if (gamepad2.b){
+            lift.setMotorSpeed(-0.8);
+        } else {
+            lift.setMotorSpeed(0);
+        }
 
         double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
         double x = gamepad1.left_stick_x;
         double rx = gamepad1.right_stick_x;
-        mecanumDrivetrain.mecanumDrive(x,y,rx);
+//        mecanumDrivetrain.mecanumDrive(x,y,rx);
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
