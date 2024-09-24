@@ -37,10 +37,10 @@ public class MecanumDrivetrain {
          * This 'labeling' can be done on the Driver Station by clicking on the three dots
          * in the upper right corner and then going to 'Configure Robot'
          */
-        rightFront = hardwareMap.get(DcMotor.class, "motor0");
-        leftFront =  hardwareMap.get(DcMotor.class, "motor1");
-        rightBack =  hardwareMap.get(DcMotor.class, "motor2");
-        leftBack =  hardwareMap.get(DcMotor.class, "motor3");
+        rightFront = hardwareMap.get(DcMotor.class, "motor3");
+        leftFront =  hardwareMap.get(DcMotor.class, "motor2");
+        rightBack =  hardwareMap.get(DcMotor.class, "motor1");
+        leftBack =  hardwareMap.get(DcMotor.class, "motor0");
 
         /*
          * Normally a DC motors runs in the clockwise direction for positive values
@@ -52,6 +52,10 @@ public class MecanumDrivetrain {
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         /*
          * Tell the motors to use the integrated encoders
          * This gives a bit more precision while controlling the motors
