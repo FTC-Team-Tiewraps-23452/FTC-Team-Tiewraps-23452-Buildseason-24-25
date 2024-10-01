@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.lib.kinematics.ChassisSpeeds;
+
 
 /**
  * This file is an example of how to define a mecanum drivetrain in your code.
@@ -76,11 +78,16 @@ public class MecanumDrivetrain {
 
 
 
-    public void mecanumDrive(double x, double y, double rx){
-        leftFront.setPower((y + x + rx));
-        leftBack.setPower((y - x + rx));
-        rightFront.setPower((y - x - rx));
-        rightBack.setPower((y + x - rx));
+    public void mecanumDrive(ChassisSpeeds chassisSpeeds){
+        double rightFrontPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
+        double leftFrontPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
+        double rightBackPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
+        double leftBackPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
+
+        rightFront.setPower(rightFrontPower);
+        leftFront.setPower(leftFrontPower);
+        rightBack.setPower(rightBackPower);
+        leftBack.setPower(leftBackPower);
     }
     /**
      * Stop all motors of the drivetrain
