@@ -19,9 +19,9 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
  */
 
 /*
-* After the @TeleOp, the name of the TeleOP is defined which is displayed on the Driver Station
-* The group can be filled in to group different Opmodes on the phone
-* The // before @Disabled can be removed to hide the Opmode on the Driver Station
+ * After the @TeleOp, the name of the TeleOP is defined which is displayed on the Driver Station
+ * The group can be filled in to group different Opmodes on the phone
+ * The // before @Disabled can be removed to hide the Opmode on the Driver Station
  */
 @TeleOp(name="TeleOP-intoTheDeep-", group="Iterative Opmode")
 //@Disabled
@@ -31,9 +31,9 @@ public class TeleOP extends OpMode
     private final ElapsedTime runtime = new ElapsedTime();
 
     /*
-    * Declare subsystems
-    * This means that we will say that certain subsystems exist and give them a name,
-    * but not yet create them, this will happen in the init() function.
+     * Declare subsystems
+     * This means that we will say that certain subsystems exist and give them a name,
+     * but not yet create them, this will happen in the init() function.
      */
     private MecanumDrivetrain mecanumDrivetrain;
 

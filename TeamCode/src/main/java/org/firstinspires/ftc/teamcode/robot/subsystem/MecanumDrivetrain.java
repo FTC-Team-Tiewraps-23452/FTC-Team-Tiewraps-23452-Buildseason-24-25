@@ -4,8 +4,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.lib.kinematics.ChassisSpeeds;
-
 
 /**
  * This file is an example of how to define a mecanum drivetrain in your code.
@@ -39,10 +37,10 @@ public class MecanumDrivetrain {
          * This 'labeling' can be done on the Driver Station by clicking on the three dots
          * in the upper right corner and then going to 'Configure Robot'
          */
-        rightFront = hardwareMap.get(DcMotor.class, "motor3");
-        leftFront =  hardwareMap.get(DcMotor.class, "motor2");
-        rightBack =  hardwareMap.get(DcMotor.class, "motor1");
-        leftBack =  hardwareMap.get(DcMotor.class, "motor0");
+        rightFront = hardwareMap.get(DcMotor.class, "motor0");
+        leftFront =  hardwareMap.get(DcMotor.class, "motor1");
+        rightBack =  hardwareMap.get(DcMotor.class, "motor2");
+        leftBack =  hardwareMap.get(DcMotor.class, "motor3");
 
         /*
          * Normally a DC motors runs in the clockwise direction for positive values
@@ -51,21 +49,17 @@ public class MecanumDrivetrain {
          * Usually the left side of the drivetrain needs to be reversed,
          * but this should always be checked to be sure
          */
-        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         /*
          * Tell the motors to use the integrated encoders
          * This gives a bit more precision while controlling the motors
          */
-        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     /*
@@ -78,16 +72,11 @@ public class MecanumDrivetrain {
 
 
 
-    public void mecanumDrive(ChassisSpeeds chassisSpeeds){
-        double rightFrontPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
-        double leftFrontPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
-        double rightBackPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
-        double leftBackPower = 2 * chassisSpeeds.vxMetersPerSecond - 3 * chassisSpeeds.vyMetersPerSecond + chassisSpeeds.omegaRadiansPerSecond;
-
-        rightFront.setPower(rightFrontPower);
-        leftFront.setPower(leftFrontPower);
-        rightBack.setPower(rightBackPower);
-        leftBack.setPower(leftBackPower);
+    public void mecanumDrive(double x, double y, double rx){
+        leftFront.setPower((y + x + rx));
+        leftBack.setPower((y - x + rx));
+        rightFront.setPower((y - x - rx));
+        rightBack.setPower((y + x - rx));
     }
     /**
      * Stop all motors of the drivetrain
