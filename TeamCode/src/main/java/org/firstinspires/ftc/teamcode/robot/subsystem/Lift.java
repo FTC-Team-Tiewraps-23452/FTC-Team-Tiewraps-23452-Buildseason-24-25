@@ -9,14 +9,13 @@ public class Lift {
 
     public Lift(HardwareMap hardwareMap){
 
-        liftMotor = hardwareMap.get(DcMotor.class, "motor1");
+        liftMotor = hardwareMap.get(DcMotor.class, "Lift");
 
         liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-//        liftMotor.setTargetPosition(10);
-//
-//        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+        liftMotor.setTargetPosition(10);
     }
     public void setMotorSpeed(double speed){
         liftMotor.setPower(speed);
