@@ -5,20 +5,21 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Lift {
+
     private DcMotor liftMotor;
 
+
     public Lift(HardwareMap hardwareMap){
+        liftMotor = hardwareMap.get(DcMotor.class, "motor4");
 
-        liftMotor = hardwareMap.get(DcMotor.class, "motor1");
-
-        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-//        liftMotor.setTargetPosition(10);
-//
-//        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
-    public void setMotorSpeed(double speed){
-        liftMotor.setPower(speed);
+
+    public void liftUp(){
+        liftMotor.setPower(0.5);
+    }
+
+    public void liftDown(){
+        liftMotor.setPower(-0.5);
     }
 }
