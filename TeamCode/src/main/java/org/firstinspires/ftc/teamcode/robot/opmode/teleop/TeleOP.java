@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.robot.subsystem.Arm;
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
 
 /**
@@ -36,6 +37,7 @@ public class TeleOP extends OpMode
     * but not yet create them, this will happen in the init() function.
      */
     private MecanumDrivetrain mecanumDrivetrain;
+    private Arm arm;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -50,6 +52,7 @@ public class TeleOP extends OpMode
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
         mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
+        arm = new Arm(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -80,7 +83,17 @@ public class TeleOP extends OpMode
         /*
          * Execute the functions of the example subsystem based on controller input
          */
-
+        if (gamepad2.a){
+            arm.setPosition(100);
+        } else if (gamepad2.b){
+            arm.setPosition(500);
+        } else if (gamepad2.x) {
+            arm.setPosition(1000);
+        } else if (gamepad2.y) {
+            arm.setPosition(-500);
+        } else {
+            arm.stop(); // commend deze regel uit als je niet wil dat de arm automatisch stopt
+        }
 
         double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
         double x = gamepad1.left_stick_x;
