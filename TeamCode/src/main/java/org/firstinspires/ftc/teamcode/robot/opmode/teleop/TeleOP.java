@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.robot.subsystem.Arm;
+import org.firstinspires.ftc.teamcode.robot.subsystem.ArmPID;
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
 
 /**
@@ -38,6 +39,7 @@ public class TeleOP extends OpMode
      */
     private MecanumDrivetrain mecanumDrivetrain;
     private Arm arm;
+    private ArmPID armPID;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -53,6 +55,7 @@ public class TeleOP extends OpMode
          */
         mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
         arm = new Arm(hardwareMap);
+        armPID = new ArmPID(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -93,6 +96,18 @@ public class TeleOP extends OpMode
             arm.setPosition(-500);
         } else {
             arm.stop(); // commend deze regel uit als je niet wil dat de arm automatisch stopt
+        }
+
+        if (gamepad1.a){
+            armPID.setPositionWithPID(100);
+        } else if (gamepad1.b){
+            armPID.setPositionWithPID(500);
+        } else if (gamepad1.x) {
+            armPID.setPositionWithPID(1000);
+        } else if (gamepad1.y) {
+            armPID.setPositionWithPID(-500);
+        } else {
+            armPID.stop(); // commend deze regel uit als je niet wil dat de arm automatisch stopt
         }
 
         double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
