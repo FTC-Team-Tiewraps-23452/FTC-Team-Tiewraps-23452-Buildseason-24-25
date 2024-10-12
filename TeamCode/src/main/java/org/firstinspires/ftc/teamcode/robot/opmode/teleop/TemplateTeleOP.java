@@ -90,11 +90,17 @@ public class TemplateTeleOP extends OpMode
         //The y position of the stick is the input of the function
 
        if (gamepad2.b){
-            intake.setMotorSpeed(0.5);
-       } else if (gamepad2.a) {
-            intake.setMotorSpeed(-0.5);
-       } else {
-            intake.setMotorSpeed(0);
+            intake.setIntakeMotorIn();
+       } else if (gamepad2.a){
+            intake.setIntakeMotorOut();
+       } else{
+            intake.setIntakeMotorOff();
+       }
+
+       if (gamepad2.x){
+            intake.storeMotorStore();
+       } else if (gamepad2.y){
+            intake.storeMotorIntake();
        }
 
         // Show the elapsed game time and wheel power.

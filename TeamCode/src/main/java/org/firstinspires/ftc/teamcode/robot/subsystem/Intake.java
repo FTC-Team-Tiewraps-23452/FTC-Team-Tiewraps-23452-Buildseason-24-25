@@ -8,13 +8,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 /**
  * This file is an example of how a subsystem can be defined.
  * Actual subsystems could for example be an intake, or a drivetrain.
- *
  * In a subsystem file, the different parameters and functions are defined.
  */
 public class Intake {
 
     //Declare motor objects
-    private  DcMotor myMotor;
+    private DcMotor intakeMotor;
+    private DcMotor storeMotor;
 
     /**
      * This is the constructor of the subsystem
@@ -33,33 +33,45 @@ public class Intake {
         * This 'labeling' can be done on the Driver Station by clicking on the three dots
         * in the upper right corner and then going to 'Configure Robot'
          */
-        myMotor = hardwareMap.get(DcMotor.class, "intake");
+        intakeMotor = hardwareMap.get(DcMotor.class, "intake");
+        storeMotor = hardwareMap.get(DcMotor.class, "store");
 
         /*
         * Normally a DC motors runs in the clockwise direction for positive values
         * If positive values need to correspond to counter clockwise rotation,
         * for example for a drivetrain, the motor can be reversed
          */
-        myMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        intakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         /*
          * Tell the motors to use the integrated encoders
          * This gives a bit more precision while controlling the motors
          */
-        myMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        storeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        storeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Servos can also be extracted from the hardwareMap similar to DC motors
     }
 
-    /**
-     * Example of a function to set a motor to a certain speed
-     *
-     * @param speed Desired speed of the motor
-     *              -1 corresponds to full power backwards
-     *              1 corresponds to full power forwards
-     */
-    public void setMotorSpeed(double speed){
-        myMotor.setPower(speed);
+    public void setIntakeMotorIn(){
+        intakeMotor.setPower(0.5);
+    }
+    public void setIntakeMotorOut(){
+        intakeMotor.setPower(-0.5);
+    }
+    public void setIntakeMotorOff(){
+        intakeMotor.setPower(0);
+    }
+    public void storeMotorStore(){
+        storeMotor.setTargetPosition(50);
+        storeMotor.setPower(0.5);
+        storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+    public void storeMotorIntake(){
+        storeMotor.setTargetPosition(0);
+        storeMotor.setPower(0.5);
+        storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
 }
