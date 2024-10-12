@@ -9,17 +9,6 @@ import org.firstinspires.ftc.teamcode.lib.geometry.Rotation2d;
 import org.firstinspires.ftc.teamcode.lib.kinematics.ChassisSpeeds;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 
-/**
- * This file is a template for an "OpMode".
- * An OpMode is a 'program' that runs in either the autonomous or the teleop period of an FTC match.
- * The names of OpModes appear on the menu of the FTC Driver Station.
- * When a selection is made from the menu, the corresponding OpMode
- * is put on the Robot Controller and executed.
- *
- * This particular OpMode contains a template to structure your code with subsystems.
- *
- */
-
 /*
 * After the @TeleOp, the name of the TeleOP is defined which is displayed on the Driver Station
 * The group can be filled in to group different Opmodes on the phone
@@ -81,13 +70,8 @@ public class TemplateTeleOP extends OpMode
     public void loop() {
 
         /*
-         * Execute the functions of the example subsystem based on controller input
+         * Execute the functions of the subsystem based on controller input
          */
-
-
-        //The example subsystem also has a motor which can be set to a certain speed
-        //This speed is determined by the left stick of the 2nd controller
-        //The y position of the stick is the input of the function
 
        if (gamepad2.b){
             intake.setIntakeMotorIn();

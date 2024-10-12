@@ -4,12 +4,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-
-/**
- * This file is an example of how a subsystem can be defined.
- * Actual subsystems could for example be an intake, or a drivetrain.
- * In a subsystem file, the different parameters and functions are defined.
- */
 public class Intake {
 
     //Declare motor objects
@@ -49,11 +43,13 @@ public class Intake {
          */
         intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         storeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // set the motor's zero power behavior to brake
         storeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Servos can also be extracted from the hardwareMap similar to DC motors
     }
 
+    //all of the following functions need to be tuned and tested
     public void setIntakeMotorIn(){
         intakeMotor.setPower(0.5);
     }
