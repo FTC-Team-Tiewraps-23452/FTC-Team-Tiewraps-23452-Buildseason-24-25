@@ -9,6 +9,8 @@ import org.firstinspires.ftc.teamcode.lib.geometry.Rotation2d;
 import org.firstinspires.ftc.teamcode.lib.kinematics.ChassisSpeeds;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 
+import java.util.concurrent.TimeUnit;
+
 /*
 * After the @TeleOp, the name of the TeleOP is defined which is displayed on the Driver Station
 * The group can be filled in to group different Opmodes on the phone
@@ -73,17 +75,20 @@ public class TemplateTeleOP extends OpMode
          * Execute the functions of the subsystem based on controller input
          */
 
-       if (gamepad2.b){
-            intake.setIntakeMotorIn();
-       } else if (gamepad2.a){
-            intake.setIntakeMotorOut();
-       } else{
-            intake.setIntakeMotorOff();
+       if (gamepad2.b) {
+           intake.setIntakeServoIn();
+       }
+       else if (gamepad2.a){
+            intake.setIntakeServoOut();
+       }
+       else {
+           intake.setIntakeServoOff();
        }
 
        if (gamepad2.x){
             intake.storeMotorStore();
-       } else if (gamepad2.y){
+       }
+       if (gamepad2.y){
             intake.storeMotorIntake();
        }
 

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.robot.subsystem;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -7,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Intake {
 
     //Declare motor objects
-    private DcMotor intakeMotor;
+    private CRServo intakeServo;
     private DcMotor storeMotor;
 
     /**
@@ -27,7 +28,7 @@ public class Intake {
         * This 'labeling' can be done on the Driver Station by clicking on the three dots
         * in the upper right corner and then going to 'Configure Robot'
          */
-        intakeMotor = hardwareMap.get(DcMotor.class, "intake");
+        intakeServo = hardwareMap.get(CRServo.class, "intake");
         storeMotor = hardwareMap.get(DcMotor.class, "store");
 
         /*
@@ -35,13 +36,11 @@ public class Intake {
         * If positive values need to correspond to counter clockwise rotation,
         * for example for a drivetrain, the motor can be reversed
          */
-        intakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         /*
          * Tell the motors to use the integrated encoders
          * This gives a bit more precision while controlling the motors
          */
-        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         storeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // set the motor's zero power behavior to brake
         storeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -50,22 +49,22 @@ public class Intake {
     }
 
     //all of the following functions need to be tuned and tested
-    public void setIntakeMotorIn(){
-        intakeMotor.setPower(0.5);
+    public void setIntakeServoIn(){
+        intakeServo.setPower(0.5);
     }
-    public void setIntakeMotorOut(){
-        intakeMotor.setPower(-0.5);
+    public void setIntakeServoOut(){
+        intakeServo.setPower(-0.5);
     }
-    public void setIntakeMotorOff(){
-        intakeMotor.setPower(0);
+    public void setIntakeServoOff(){
+        intakeServo.setPower(0);
     }
     public void storeMotorStore(){
-        storeMotor.setTargetPosition(50);
+        storeMotor.setTargetPosition(450);
         storeMotor.setPower(0.5);
         storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
     public void storeMotorIntake(){
-        storeMotor.setTargetPosition(0);
+        storeMotor.setTargetPosition(50);
         storeMotor.setPower(0.5);
         storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
