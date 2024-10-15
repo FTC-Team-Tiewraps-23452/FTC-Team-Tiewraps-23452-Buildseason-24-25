@@ -59,13 +59,13 @@ public class Intake {
         intakeServo.setPower(0.0);
     }
     public void storeMotorStore(){
-        storeMotor.setTargetPosition(425);
-        storeMotor.setPower(0.3);
+        storeMotor.setTargetPosition(375);
+        storeMotor.setPower(0.1);
         storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
     public void storeMotorIntake(){
-        storeMotor.setTargetPosition(0);
-        storeMotor.setPower(0.3);
+        storeMotor.setTargetPosition(35);
+        storeMotor.setPower(0.2);
         storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
