@@ -93,10 +93,10 @@ public class TeleOP extends OpMode
         double rx = gamepad1.right_stick_x;
         mecanumDrivetrain.mecanumDrive(x,y,rx);
 
-        if (gamepad1.dpad_up){
+        if (gamepad2.dpad_up){
             lift.liftUp();
         }
-        else if (gamepad1.dpad_down){
+        else if (gamepad2.dpad_down){
             lift.liftDown();
         }
         else{
