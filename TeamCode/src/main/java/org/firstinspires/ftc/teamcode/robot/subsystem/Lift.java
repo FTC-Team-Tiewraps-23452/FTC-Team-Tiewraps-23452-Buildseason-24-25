@@ -34,9 +34,9 @@ public class Lift {
     }
 
     public void score(){
-        liftServo.setPosition(30);
+        liftServo.setPosition(0.3);
     }
     public void intake(){
-        liftServo.setPosition(180);
+        liftServo.setPosition(0.45);
     }
 }

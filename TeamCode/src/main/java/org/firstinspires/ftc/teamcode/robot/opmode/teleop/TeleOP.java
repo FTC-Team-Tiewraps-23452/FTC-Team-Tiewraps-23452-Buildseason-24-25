@@ -102,10 +102,10 @@ public class TeleOP extends OpMode
         else{
             lift.stopLift();
         }
-        if (gamepad2.dpad_left){
+        if (gamepad2.dpad_right){
             lift.intake();
         }
-        else if(gamepad2.dpad_right){
+        else if(gamepad2.dpad_left){
             lift.score();
         }
 
