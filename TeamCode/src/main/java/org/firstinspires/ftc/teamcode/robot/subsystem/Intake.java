@@ -64,7 +64,7 @@ public class Intake {
         storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
     public void storeMotorIntake(){
-        storeMotor.setTargetPosition(25);
+        storeMotor.setTargetPosition(20);
         storeMotor.setPower(0.2);
         storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
