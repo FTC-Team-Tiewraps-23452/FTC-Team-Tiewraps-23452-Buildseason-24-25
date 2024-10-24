@@ -28,8 +28,8 @@ public class Intake {
         * This 'labeling' can be done on the Driver Station by clicking on the three dots
         * in the upper right corner and then going to 'Configure Robot'
          */
-        intakeServo = hardwareMap.get(CRServo.class, "intake");
-        storeMotor = hardwareMap.get(DcMotor.class, "store");
+        intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
+        storeMotor = hardwareMap.get(DcMotor.class, "storeMotor");
 
         /*
         * Normally a DC motors runs in the clockwise direction for positive values
@@ -44,8 +44,6 @@ public class Intake {
         storeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // set the motor's zero power behavior to brake
         storeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        // Servos can also be extracted from the hardwareMap similar to DC motors
     }
 
     //all of the following functions need to be tuned and tested
@@ -58,15 +56,10 @@ public class Intake {
     public void setIntakeServoOff(){
         intakeServo.setPower(0.0);
     }
-    public void storeMotorStore(){
-        storeMotor.setTargetPosition(390);
-        storeMotor.setPower(0.1);
-        storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
-    public void storeMotorIntake(){
-        storeMotor.setTargetPosition(20);
-        storeMotor.setPower(0.1);
-        storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
 
+    public void storeMotorStore(int position){
+        storeMotor.setTargetPosition(position);
+        storeMotor.setPower(0.1);
+        storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
 }

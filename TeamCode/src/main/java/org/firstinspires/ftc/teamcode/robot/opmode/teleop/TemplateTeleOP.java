@@ -86,10 +86,10 @@ public class TemplateTeleOP extends OpMode
        }
 
        if (gamepad2.x){
-            intake.storeMotorStore();
+            intake.storeMotorStore(390);
        }
        if (gamepad2.y){
-            intake.storeMotorIntake();
+            intake.storeMotorIntake(20);
        }
 
         // Show the elapsed game time and wheel power.
