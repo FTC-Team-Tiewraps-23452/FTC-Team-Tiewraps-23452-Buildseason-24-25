@@ -12,8 +12,8 @@ public class Lift {
 
 
     public Lift(HardwareMap hardwareMap){
-        liftMotor = hardwareMap.get(DcMotor.class, "motor4");
-        liftServo = hardwareMap.get(Servo.class, "lift");
+        liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
+        liftServo = hardwareMap.get(Servo.class, "storeBoxServo");
 
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

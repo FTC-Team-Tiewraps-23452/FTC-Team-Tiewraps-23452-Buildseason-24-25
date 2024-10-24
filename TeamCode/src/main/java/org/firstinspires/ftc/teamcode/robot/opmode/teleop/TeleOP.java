@@ -6,9 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
-import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
-import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
-
 
 
 /**
@@ -39,7 +36,6 @@ public class TeleOP extends OpMode
     * This means that we will say that certain subsystems exist and give them a name,
     * but not yet create them, this will happen in the init() function.
      */
-    private MecanumDrivetrain mecanumDrivetrain;
     private Lift lift;
 
     /**
@@ -54,7 +50,6 @@ public class TeleOP extends OpMode
          * Create all the subsystems
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
-        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
         lift = new Lift(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
@@ -87,11 +82,6 @@ public class TeleOP extends OpMode
          * Execute the functions of the example subsystem based on controller input
          */
 
-
-        double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-        double x = gamepad1.left_stick_x;
-        double rx = gamepad1.right_stick_x;
-        mecanumDrivetrain.mecanumDrive(x,y,rx);
 
         if (gamepad2.dpad_up){
             lift.liftUp();
