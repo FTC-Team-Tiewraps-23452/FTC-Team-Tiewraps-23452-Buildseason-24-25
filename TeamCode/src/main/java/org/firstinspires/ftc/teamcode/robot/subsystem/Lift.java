@@ -1,14 +1,13 @@
 package org.firstinspires.ftc.teamcode.robot.subsystem;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Lift {
 
-    private DcMotor liftMotor;
-    private Servo liftServo;
+    private final DcMotor liftMotor;
+    private final Servo liftServo;
 
 
     public Lift(HardwareMap hardwareMap){
