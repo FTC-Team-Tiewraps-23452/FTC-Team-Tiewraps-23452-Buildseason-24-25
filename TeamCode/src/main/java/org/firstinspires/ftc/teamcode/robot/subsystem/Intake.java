@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.robot.subsystem;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake {
@@ -57,7 +56,7 @@ public class Intake {
         intakeServo.setPower(0.0);
     }
 
-    public void storeMotorStore(int position){
+    public void setIntakePosition(int position){
         storeMotor.setTargetPosition(position);
         storeMotor.setPower(0.1);
         storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);

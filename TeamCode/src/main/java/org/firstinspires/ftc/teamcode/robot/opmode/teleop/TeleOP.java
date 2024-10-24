@@ -5,20 +5,16 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.lib.geometry.Rotation2d;
-import org.firstinspires.ftc.teamcode.lib.kinematics.ChassisSpeeds;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
-
-import java.util.concurrent.TimeUnit;
 
 /*
 * After the @TeleOp, the name of the TeleOP is defined which is displayed on the Driver Station
 * The group can be filled in to group different Opmodes on the phone
 * The // before @Disabled can be removed to hide the Opmode on the Driver Station
  */
-@TeleOp(name="Template TeleOP", group="Iterative Opmode")
+@TeleOp(name="TeleOP", group="Iterative Opmode")
 //@Disabled
-public class TemplateTeleOP extends OpMode
+public class TeleOP extends OpMode
 {
     // Declare timer to keep track of how long the program has been running
     private final ElapsedTime runtime = new ElapsedTime();
@@ -86,10 +82,10 @@ public class TemplateTeleOP extends OpMode
        }
 
        if (gamepad2.x){
-            intake.storeMotorStore(390);
+            intake.setIntakePosition(390);
        }
        if (gamepad2.y){
-            intake.storeMotorIntake(20);
+            intake.setIntakePosition(20);
        }
 
         // Show the elapsed game time and wheel power.
