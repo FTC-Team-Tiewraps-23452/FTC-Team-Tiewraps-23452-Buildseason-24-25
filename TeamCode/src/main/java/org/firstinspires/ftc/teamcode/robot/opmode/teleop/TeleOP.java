@@ -83,20 +83,20 @@ public class TeleOP extends OpMode
          */
 
 
-        if (gamepad2.dpad_up){
-            lift.liftUp();
+        if (gamepad2.right_trigger == 1){
+            lift.setLiftSpeed(1.0);
         }
-        else if (gamepad2.dpad_down){
-            lift.liftDown();
+        else if (gamepad2.left_trigger == 1){
+            lift.setLiftSpeed(-1.0);
         }
         else{
-            lift.stopLift();
+            lift.setLiftSpeed(0);
         }
-        if (gamepad2.dpad_right){
-            lift.intake();
+        if (gamepad2.left_bumper){
+            lift.setServoPosition(0.25);
         }
-        else if(gamepad2.dpad_left){
-            lift.score();
+        else if(gamepad2.right_bumper){
+            lift.setServoPosition(0.1);
         }
 
         // Show the elapsed game time and wheel power.
