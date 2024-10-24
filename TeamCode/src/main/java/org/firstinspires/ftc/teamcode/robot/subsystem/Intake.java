@@ -46,14 +46,8 @@ public class Intake {
     }
 
     //all of the following functions need to be tuned and tested
-    public void setIntakeServoIn(){
-        intakeServo.setPower(1.0);
-    }
-    public void setIntakeServoOut(){
-        intakeServo.setPower(-1.0);
-    }
-    public void setIntakeServoOff(){
-        intakeServo.setPower(0.0);
+    public void setIntakeServoSpeed(double speed){
+        intakeServo.setPower(speed);
     }
 
     public void setIntakePosition(int position){

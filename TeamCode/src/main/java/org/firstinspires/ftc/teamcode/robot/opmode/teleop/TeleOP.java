@@ -72,13 +72,13 @@ public class TeleOP extends OpMode
          */
 
        if (gamepad2.b) {
-           intake.setIntakeServoIn();
+           intake.setIntakeServoSpeed(1.0);
        }
        else if (gamepad2.a){
-            intake.setIntakeServoOut();
+            intake.setIntakeServoSpeed(-1.0);
        }
        else {
-           intake.setIntakeServoOff();
+           intake.setIntakeServoSpeed(0.0);
        }
 
        if (gamepad2.x){
