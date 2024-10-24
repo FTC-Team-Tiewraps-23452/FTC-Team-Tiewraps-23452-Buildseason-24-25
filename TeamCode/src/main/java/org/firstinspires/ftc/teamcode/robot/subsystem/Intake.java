@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Intake {
 
     //Declare motor objects
-    private CRServo intakeServo;
-    private DcMotor storeMotor;
+    private final CRServo intakeServo;
+    private final DcMotor storeMotor;
 
     /**
      * This is the constructor of the subsystem
