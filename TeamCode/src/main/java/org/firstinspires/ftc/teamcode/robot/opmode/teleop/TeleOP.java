@@ -82,16 +82,8 @@ public class TeleOP extends OpMode
          * Execute the functions of the example subsystem based on controller input
          */
 
+        lift.setLiftSpeed(gamepad2.left_stick_y);
 
-        if (gamepad2.right_trigger == 1){
-            lift.setLiftSpeed(1.0);
-        }
-        else if (gamepad2.left_trigger == 1){
-            lift.setLiftSpeed(-1.0);
-        }
-        else{
-            lift.setLiftSpeed(0);
-        }
         if (gamepad2.left_bumper){
             lift.setServoPosition(0.25);
         }
