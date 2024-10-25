@@ -4,19 +4,8 @@ package org.firstinspires.ftc.teamcode.robot.opmode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
-
-/**
- * This file is a template for an "OpMode".
- * An OpMode is a 'program' that runs in either the autonomous or the teleop period of an FTC match.
- * The names of OpModes appear on the menu of the FTC Driver Station.
- * When a selection is made from the menu, the corresponding OpMode
- * is put on the Robot Controller and executed.
- *
- * This particular OpMode contains a template to structure your code with subsystems.
- *
- */
+import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 
 /*
 * After the @TeleOp, the name of the TeleOP is defined which is displayed on the Driver Station
@@ -36,6 +25,8 @@ public class TeleOP extends OpMode
     * but not yet create them, this will happen in the init() function.
      */
     private MecanumDrivetrain mecanumDrivetrain;
+    private Intake intake;
+
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -49,6 +40,7 @@ public class TeleOP extends OpMode
          * Create all the subsystems
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
+        intake = new Intake(hardwareMap);
         mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
@@ -78,14 +70,30 @@ public class TeleOP extends OpMode
     public void loop() {
 
         /*
-         * Execute the functions of the example subsystem based on controller input
          */
 
+       if (gamepad2.b) {
+           intake.setIntakeServoSpeed(1.0);
+       }
+       else if (gamepad2.a){
+            intake.setIntakeServoSpeed(-1.0);
+       }
+       else {
+           intake.setIntakeServoSpeed(0.0);
+       }
 
-        double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-        double x = gamepad1.left_stick_x;
-        double rx = gamepad1.right_stick_x;
-        mecanumDrivetrain.mecanumDrive(x,y,rx);
+       if (gamepad2.x){
+           intake.setIntakePosition(390);
+       }
+       if (gamepad2.y){
+           intake.setIntakePosition(20);
+       }
+
+       double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+       double x = gamepad1.left_stick_x;
+       double rx = gamepad1.right_stick_x;
+       mecanumDrivetrain.mecanumDrive(x,y,rx);
+
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
