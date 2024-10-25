@@ -4,7 +4,7 @@ package org.firstinspires.ftc.teamcode.robot.opmode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 
 /*
@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 * The group can be filled in to group different Opmodes on the phone
 * The // before @Disabled can be removed to hide the Opmode on the Driver Station
  */
-@TeleOp(name="TeleOP", group="Iterative Opmode")
+@TeleOp(name="TeleOP-intoTheDeep-", group="Iterative Opmode")
 //@Disabled
 public class TeleOP extends OpMode
 {
@@ -24,6 +24,7 @@ public class TeleOP extends OpMode
     * This means that we will say that certain subsystems exist and give them a name,
     * but not yet create them, this will happen in the init() function.
      */
+    private MecanumDrivetrain mecanumDrivetrain;
     private Intake intake;
 
 
@@ -40,6 +41,7 @@ public class TeleOP extends OpMode
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
         intake = new Intake(hardwareMap);
+        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -68,7 +70,6 @@ public class TeleOP extends OpMode
     public void loop() {
 
         /*
-         * Execute the functions of the subsystem based on controller input
          */
 
        if (gamepad2.b) {
@@ -82,11 +83,17 @@ public class TeleOP extends OpMode
        }
 
        if (gamepad2.x){
-            intake.setIntakePosition(390);
+           intake.setIntakePosition(390);
        }
        if (gamepad2.y){
-            intake.setIntakePosition(20);
+           intake.setIntakePosition(20);
        }
+
+       double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+       double x = gamepad1.left_stick_x;
+       double rx = gamepad1.right_stick_x;
+       mecanumDrivetrain.mecanumDrive(x,y,rx);
+
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
