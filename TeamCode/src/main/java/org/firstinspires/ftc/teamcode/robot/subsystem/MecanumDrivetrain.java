@@ -8,16 +8,16 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 /**
  * This file is an example of how to define a mecanum drivetrain in your code.
  * It is structured in the same way as the ExampleSubsystem
- *
+
  * Different functions of the drivetrain have been defined, but not yet fully worked out
  */
 public class MecanumDrivetrain {
 
     //Declare motor and servo objects
-    private DcMotor rightFront;
-    private DcMotor leftFront;
-    private DcMotor rightBack;
-    private DcMotor leftBack;
+    private final DcMotor rightFront;
+    private final DcMotor leftFront;
+    private final DcMotor rightBack;
+    private final DcMotor leftBack;
 
 
     /**
@@ -78,27 +78,10 @@ public class MecanumDrivetrain {
      * This has been defined below for different types of drivetrains
      */
 
-
-
-
-
     public void mecanumDrive(double x, double y, double rx){
         leftFront.setPower((y + x - rx));
         leftBack.setPower((y - x - rx));
         rightFront.setPower((y - x + rx));
         rightBack.setPower((y + x + rx));
     }
-    /**
-     * Stop all motors of the drivetrain
-     */
-    public void stop(){
-        rightFront.setPower(0);
-        leftFront.setPower(0);
-        rightBack.setPower(0);
-        leftBack.setPower(0);
-    }
-    public void setLeftBackSpeed(double speed){leftBack.setPower(speed);}
-    public void setRightBackSpeed(double speed){rightBack.setPower(speed);}
-    public void setLeftFrontSpeed(double speed){leftFront.setPower(speed);}
-    public void setRightFrontSpeed(double speed){rightFront.setPower(speed);}
 }
