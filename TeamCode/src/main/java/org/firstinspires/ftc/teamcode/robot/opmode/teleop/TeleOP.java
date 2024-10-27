@@ -6,11 +6,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
-import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 
 /*
-* After the @TeleOp, the name of the TeleOP is defined which is displayed on the Driver Station
+* After the @TeleOP, the name of the TeleOP is defined which is displayed on the Driver Station
 * The group can be filled in to group different Opmodes on the phone
 * The // before @Disabled can be removed to hide the Opmode on the Driver Station
  */
@@ -28,7 +27,6 @@ public class TeleOP extends OpMode
      */
 
     private Lift lift;
-    private MecanumDrivetrain mecanumDrivetrain;
     private Intake intake;
 
     /**
@@ -46,7 +44,6 @@ public class TeleOP extends OpMode
 
         lift = new Lift(hardwareMap);
         intake = new Intake(hardwareMap);
-        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -82,7 +79,7 @@ public class TeleOP extends OpMode
       if (gamepad2.left_bumper){
           lift.setServoPosition(0.25);
       }
-      else if(gamepad2.right_bumper){
+      else {
           lift.setServoPosition(0.1);
       }
 
@@ -104,12 +101,6 @@ public class TeleOP extends OpMode
       if (gamepad2.y){
           intake.setIntakePosition(20);
       }
-      
-     //Drivetrain 
-     double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-     double x = gamepad1.left_stick_x;
-     double rx = gamepad1.right_stick_x;
-     mecanumDrivetrain.mecanumDrive(x,y,rx);
 
 
 
