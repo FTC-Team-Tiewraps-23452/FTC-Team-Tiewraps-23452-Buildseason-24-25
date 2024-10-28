@@ -7,12 +7,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
+import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
 
-/*
-* After the @TeleOP, the name of the TeleOP is defined which is displayed on the Driver Station
-* The group can be filled in to group different Opmodes on the phone
-* The // before @Disabled can be removed to hide the Opmode on the Driver Station
- */
+
 @TeleOp(name="TeleOP-intoTheDeep-", group="Iterative Opmode")
 //@Disabled
 public class TeleOP extends OpMode
@@ -21,11 +18,11 @@ public class TeleOP extends OpMode
     private final ElapsedTime runtime = new ElapsedTime();
 
     /*
-    * Declare subsystems
-    * This means that we will say that certain subsystems exist and give them a name,
-    * but not yet create them, this will happen in the init() function.
+     * Declare subsystems
+     * This means that we will say that certain subsystems exist and give them a name,
+     * but not yet create them, this will happen in the init() function.
      */
-
+    private MecanumDrivetrain mecanumDrivetrain;
     private Lift lift;
     private Intake intake;
 
@@ -41,7 +38,7 @@ public class TeleOP extends OpMode
          * Create all the subsystems
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
-
+        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
         lift = new Lift(hardwareMap);
         intake = new Intake(hardwareMap);
 
@@ -71,7 +68,12 @@ public class TeleOP extends OpMode
     @Override
     public void loop() {
 
-      
+      //drivetrain
+      double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+      double x = gamepad1.left_stick_x;
+      double rx = -gamepad1.right_stick_x;
+      mecanumDrivetrain.mecanumDrive(x,y,rx);
+
       // lift
       lift.setLiftSpeed(gamepad2.left_stick_y);
 
@@ -86,11 +88,9 @@ public class TeleOP extends OpMode
       //Intake servo
       if (gamepad2.b) {
           intake.setIntakeServoSpeed(1.0);
-      }
-      else if (gamepad2.a){
+      } else if (gamepad2.a){
           intake.setIntakeServoSpeed(-1.0);
-      }
-      else {
+      } else {
            intake.setIntakeServoSpeed(0.0);
       }
 
