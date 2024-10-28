@@ -5,24 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
+import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
 
-/**
- * This file is a template for an "OpMode".
- * An OpMode is a 'program' that runs in either the autonomous or the teleop period of an FTC match.
- * The names of OpModes appear on the menu of the FTC Driver Station.
- * When a selection is made from the menu, the corresponding OpMode
- * is put on the Robot Controller and executed.
- *
- * This particular OpMode contains a template to structure your code with subsystems.
- *
- */
 
-/*
- * After the @TeleOp, the name of the TeleOP is defined which is displayed on the Driver Station
- * The group can be filled in to group different Opmodes on the phone
- * The // before @Disabled can be removed to hide the Opmode on the Driver Station
- */
 @TeleOp(name="TeleOP-intoTheDeep-", group="Iterative Opmode")
 //@Disabled
 public class TeleOP extends OpMode
@@ -36,6 +23,8 @@ public class TeleOP extends OpMode
      * but not yet create them, this will happen in the init() function.
      */
     private MecanumDrivetrain mecanumDrivetrain;
+    private Lift lift;
+    private Intake intake;
 
     /**
      * Code to run ONCE when the driver hits INIT
@@ -50,6 +39,8 @@ public class TeleOP extends OpMode
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
         mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
+        lift = new Lift(hardwareMap);
+        intake = new Intake(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -77,15 +68,41 @@ public class TeleOP extends OpMode
     @Override
     public void loop() {
 
-        /*
-         * Execute the functions of the example subsystem based on controller input
-         */
+      //drivetrain
+      double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+      double x = gamepad1.left_stick_x;
+      double rx = -gamepad1.right_stick_x;
+      mecanumDrivetrain.mecanumDrive(x,y,rx);
+
+      // lift
+      lift.setLiftSpeed(gamepad2.left_stick_y);
+
+      // bakje lift
+      if (gamepad2.left_bumper){
+          lift.setServoPosition(0.25);
+      }
+      else {
+          lift.setServoPosition(0.1);
+      }
+
+      //Intake servo
+      if (gamepad2.b) {
+          intake.setIntakeServoSpeed(1.0);
+      } else if (gamepad2.a){
+          intake.setIntakeServoSpeed(-1.0);
+      } else {
+           intake.setIntakeServoSpeed(0.0);
+      }
+
+      //Intake angle
+      if (gamepad2.x){
+          intake.setIntakePosition(390);
+      }
+      if (gamepad2.y){
+          intake.setIntakePosition(20);
+      }
 
 
-        double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-        double x = gamepad1.left_stick_x;
-        double rx = -gamepad1.right_stick_x;
-        mecanumDrivetrain.mecanumDrive(x,y,rx);
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
