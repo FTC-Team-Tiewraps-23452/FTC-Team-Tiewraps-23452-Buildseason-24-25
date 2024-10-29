@@ -79,10 +79,10 @@ public class TeleOP extends OpMode
 
       // bakje lift
       if (gamepad2.left_bumper){
-          lift.setServoPosition(0.25);
+          lift.setServoPosition(0.1);
       }
       else {
-          lift.setServoPosition(0.1);
+          lift.setServoPosition(0.25);
       }
 
       //Intake servo
