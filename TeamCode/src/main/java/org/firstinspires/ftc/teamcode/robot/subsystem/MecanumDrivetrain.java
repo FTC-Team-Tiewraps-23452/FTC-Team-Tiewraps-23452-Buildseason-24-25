@@ -56,10 +56,10 @@ public class MecanumDrivetrain {
          * Tell the motors to use the integrated encoders
          * This gives a bit more precision while controlling the motors
          */
-        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         /* put the motors on brake mode
          * this gives more precision while driving
@@ -79,9 +79,9 @@ public class MecanumDrivetrain {
      */
 
     public void mecanumDrive(double x, double y, double rx){
-        leftFront.setPower((y + x - rx));
-        leftBack.setPower((y - x - rx));
-        rightFront.setPower((y - x + rx));
-        rightBack.setPower((y + x + rx));
+        leftFront.setPower((y + x + rx));
+        leftBack.setPower((y - x + rx));
+        rightFront.setPower((y - x - rx));
+        rightBack.setPower((y + x - rx));
     }
 }
