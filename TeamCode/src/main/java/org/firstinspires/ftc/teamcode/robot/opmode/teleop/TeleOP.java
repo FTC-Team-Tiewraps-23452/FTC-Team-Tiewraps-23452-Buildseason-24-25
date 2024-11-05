@@ -75,14 +75,18 @@ public class TeleOP extends OpMode
       mecanumDrivetrain.mecanumDrive(x,y,rx);
 
       // lift
-      lift.setLiftSpeed(gamepad2.left_stick_y);
+      if (gamepad2.left_stick_y > 0){
+          lift.setLiftSpeed(gamepad2.left_stick_y * 0.5);
+      } else {
+          lift.setLiftSpeed(gamepad2.left_stick_y);
+      }
 
       // bakje lift
       if (gamepad2.left_bumper){
           lift.setServoPosition(0.1);
       }
       else {
-          lift.setServoPosition(0.25);
+          lift.setServoPosition(0.35);
       }
 
       //Intake servo
@@ -96,10 +100,10 @@ public class TeleOP extends OpMode
 
       //Intake angle
       if (gamepad2.x){
-          intake.setIntakePosition(390);
+          intake.setIntakePosition(10);
       }
       if (gamepad2.y){
-          intake.setIntakePosition(20);
+          intake.setIntakePosition(400);
       }
 
 
