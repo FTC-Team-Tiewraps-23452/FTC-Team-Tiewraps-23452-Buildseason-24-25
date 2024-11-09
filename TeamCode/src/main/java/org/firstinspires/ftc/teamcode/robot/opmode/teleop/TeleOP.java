@@ -82,11 +82,6 @@ public class TeleOP extends OpMode
           mecanumDrivetrain.mecanumDrive(x,y,rx);
       }
 
-//
-//      double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-//      double x = gamepad1.left_stick_x;
-//      double rx = -gamepad1.right_stick_x;
-//      mecanumDrivetrain.mecanumDrive(x,y,rx);
 
       // lift
       if (gamepad2.left_stick_y > 0){
@@ -114,9 +109,9 @@ public class TeleOP extends OpMode
 
       //Intake angle
       if (gamepad2.x){
-          intake.setIntakePosition(0);
+          intake.setIntakePosition(-30);
       }
-      if (gamepad2.y){
+      else if (gamepad2.y){
           intake.setIntakePosition(400);
       }
 

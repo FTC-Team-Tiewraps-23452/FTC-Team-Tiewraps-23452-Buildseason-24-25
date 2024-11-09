@@ -33,6 +33,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
+import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
+import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
+
 
 /**
  * This file is a template for an "OpMode".
@@ -52,7 +56,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group="Linear OpMode")
-@Disabled
 public class Autonomous extends LinearOpMode {
 
     // Declare timer to keep track of how long the program has been running
@@ -63,6 +66,10 @@ public class Autonomous extends LinearOpMode {
      * This means that we will say that certain subsystems exist and give them a name,
      * but not yet create them, this will happen in the init() function.
      */
+    private Intake intake;
+    private Lift lift;
+    private MecanumDrivetrain mecanumDrivetrain;
+
     @Override
     public void runOpMode() {
         /*
@@ -76,6 +83,9 @@ public class Autonomous extends LinearOpMode {
          * Create all the subsystems
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
+        intake = new Intake(hardwareMap);
+        lift = new Lift(hardwareMap);
+        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -86,6 +96,10 @@ public class Autonomous extends LinearOpMode {
          */
         waitForStart();
         runtime.reset();
+
+        mecanumDrivetrain.mecanumDrive(1, 0, 0);
+        sleep(2000);
+        mecanumDrivetrain.mecanumDrive(0, 0, 0);
 
     }
 }
