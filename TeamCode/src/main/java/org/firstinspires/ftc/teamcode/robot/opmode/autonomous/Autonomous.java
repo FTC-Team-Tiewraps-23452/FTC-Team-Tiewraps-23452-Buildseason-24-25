@@ -29,7 +29,6 @@
 
 package org.firstinspires.ftc.teamcode.robot.opmode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -52,9 +51,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * The // before @Disabled can be removed to hide the Opmode on the Driver Station
  */
 
-@Autonomous(name="Template Autonomous", group="Linear OpMode")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group="Linear OpMode")
 @Disabled
-public class TemplateAutonomous extends LinearOpMode {
+public class Autonomous extends LinearOpMode {
 
     // Declare timer to keep track of how long the program has been running
     private final ElapsedTime runtime = new ElapsedTime();

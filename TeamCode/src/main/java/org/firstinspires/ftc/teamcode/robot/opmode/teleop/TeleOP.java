@@ -69,10 +69,17 @@ public class TeleOP extends OpMode
     public void loop() {
 
       //drivetrain
-      double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-      double x = gamepad1.left_stick_x;
-      double rx = -gamepad1.right_stick_x;
-      mecanumDrivetrain.mecanumDrive(x,y,rx);
+      if (gamepad2.left_bumper){
+          double y = -gamepad1.left_stick_y / 2; // Remember, Y stick is reversed!
+          double x = gamepad1.left_stick_x / 2;
+          double rx = -gamepad1.right_stick_x / 2;
+          mecanumDrivetrain.mecanumDrive(x,y,rx);
+      } else {
+          double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+          double x = gamepad1.left_stick_x;
+          double rx = -gamepad1.right_stick_x;
+          mecanumDrivetrain.mecanumDrive(x,y,rx);
+      }
 
       // lift
       if (gamepad2.left_stick_y > 0){
