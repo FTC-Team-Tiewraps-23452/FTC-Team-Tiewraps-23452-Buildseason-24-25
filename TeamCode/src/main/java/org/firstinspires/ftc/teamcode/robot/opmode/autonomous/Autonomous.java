@@ -33,6 +33,16 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import static com.qualcomm.hardware.rev.RevHubOrientationOnRobot.xyzOrientation;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+
+import com.qualcomm.robotcore.hardware.IMU;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
+
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
@@ -66,6 +76,7 @@ public class Autonomous extends LinearOpMode {
      * This means that we will say that certain subsystems exist and give them a name,
      * but not yet create them, this will happen in the init() function.
      */
+    private IMU imu;
     private Intake intake;
     private Lift lift;
     private MecanumDrivetrain mecanumDrivetrain;
@@ -83,9 +94,21 @@ public class Autonomous extends LinearOpMode {
          * Create all the subsystems
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
+
+
+        imu = hardwareMap.get(IMU.class, "imu");
+      
+        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
         intake = new Intake(hardwareMap);
         lift = new Lift(hardwareMap);
-        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
+
+        double xRotation = 0;
+        double yRotation = 0;
+        double zRotation = 0;
+        Orientation hubRotation = xyzOrientation(xRotation, yRotation, zRotation);
+
+        RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(hubRotation);
+        imu.initialize(new IMU.Parameters(orientationOnRobot));
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -96,10 +119,22 @@ public class Autonomous extends LinearOpMode {
          */
         waitForStart();
         runtime.reset();
+        rotate(90);
 
-        mecanumDrivetrain.mecanumDrive(1, 0, 0);
-        sleep(2000);
-        mecanumDrivetrain.mecanumDrive(0, 0, 0);
+    }
 
+    private void drive(double driveDistance) {
+    }
+
+    private void rotate(double rotaionAngle) {
+        if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) != rotaionAngle) {
+            if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) < 90) {
+                mecanumDrivetrain.mecanumDrive(0, 0, 0.5);
+            } if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) >= 90) {
+                mecanumDrivetrain.mecanumDrive(0, 0, -0.5);
+            }
+        } else {
+            mecanumDrivetrain.mecanumDrive(0, 0, 0);
+        }
     }
 }
