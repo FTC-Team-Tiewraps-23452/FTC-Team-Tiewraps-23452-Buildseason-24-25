@@ -29,10 +29,18 @@
 
 package org.firstinspires.ftc.teamcode.robot.opmode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import static com.qualcomm.hardware.rev.RevHubOrientationOnRobot.xyzOrientation;
+
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.IMU;
+
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
+import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
+import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
+import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
 
 
 /**
@@ -52,9 +60,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * The // before @Disabled can be removed to hide the Opmode on the Driver Station
  */
 
-@Autonomous(name="Template Autonomous", group="Linear OpMode")
-@Disabled
-public class TemplateAutonomous extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group="Linear OpMode")
+public class Autonomous extends LinearOpMode {
 
     // Declare timer to keep track of how long the program has been running
     private final ElapsedTime runtime = new ElapsedTime();
@@ -64,6 +71,11 @@ public class TemplateAutonomous extends LinearOpMode {
      * This means that we will say that certain subsystems exist and give them a name,
      * but not yet create them, this will happen in the init() function.
      */
+
+    IMU imu;
+    MecanumDrivetrain mecanumDrivetrain;
+    Intake intake;
+    Lift lift;
     @Override
     public void runOpMode() {
         /*
@@ -77,6 +89,19 @@ public class TemplateAutonomous extends LinearOpMode {
          * Create all the subsystems
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
+        imu = hardwareMap.get(IMU.class, "imu");
+
+        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
+        intake = new Intake(hardwareMap);
+        lift = new Lift(hardwareMap);
+
+        double xRotation = 0;
+        double yRotation = 0;
+        double zRotation = 0;
+        Orientation hubRotation = xyzOrientation(xRotation, yRotation, zRotation);
+
+        RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(hubRotation);
+        imu.initialize(new IMU.Parameters(orientationOnRobot));
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -88,5 +113,21 @@ public class TemplateAutonomous extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
+        rotate(90);
+        drive(100);
+
+
+    }
+
+    private void drive(double driveDistance) {
+
+    }
+
+    private void rotate(double rotaionAngle) {
+        if (value < rotaionAngle) {
+            mecanumDrivetrain.mecanumDrive(0, 0, 1);
+        } else {
+            mecanumDrivetrain.mecanumDrive(0, 0, 0);
+        }
     }
 }
