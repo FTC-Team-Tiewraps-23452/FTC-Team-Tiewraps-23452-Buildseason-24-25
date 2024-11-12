@@ -36,8 +36,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
@@ -114,18 +116,19 @@ public class Autonomous extends LinearOpMode {
         runtime.reset();
 
         rotate(90);
-        drive(100);
-
 
     }
 
     private void drive(double driveDistance) {
-
     }
 
     private void rotate(double rotaionAngle) {
-        if (value < rotaionAngle) {
-            mecanumDrivetrain.mecanumDrive(0, 0, 1);
+        if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) != rotaionAngle) {
+            if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) < 90) {
+                mecanumDrivetrain.mecanumDrive(0, 0, 0.5);
+            } if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) >= 90) {
+                mecanumDrivetrain.mecanumDrive(0, 0, -0.5);
+            }
         } else {
             mecanumDrivetrain.mecanumDrive(0, 0, 0);
         }
