@@ -29,10 +29,13 @@
 
 package org.firstinspires.ftc.teamcode.robot.opmode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
+import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
+import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
 
 
 /**
@@ -52,9 +55,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * The // before @Disabled can be removed to hide the Opmode on the Driver Station
  */
 
-@Autonomous(name="Template Autonomous", group="Linear OpMode")
-@Disabled
-public class TemplateAutonomous extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group="Linear OpMode")
+public class Autonomous extends LinearOpMode {
 
     // Declare timer to keep track of how long the program has been running
     private final ElapsedTime runtime = new ElapsedTime();
@@ -64,6 +66,10 @@ public class TemplateAutonomous extends LinearOpMode {
      * This means that we will say that certain subsystems exist and give them a name,
      * but not yet create them, this will happen in the init() function.
      */
+    private Intake intake;
+    private Lift lift;
+    private MecanumDrivetrain mecanumDrivetrain;
+
     @Override
     public void runOpMode() {
         /*
@@ -77,6 +83,9 @@ public class TemplateAutonomous extends LinearOpMode {
          * Create all the subsystems
          * Go to the folder 'subsystems' to view the subsystems, which contain more information
          */
+        intake = new Intake(hardwareMap);
+        lift = new Lift(hardwareMap);
+        mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -87,6 +96,10 @@ public class TemplateAutonomous extends LinearOpMode {
          */
         waitForStart();
         runtime.reset();
+
+        mecanumDrivetrain.mecanumDrive(1, 0, 0);
+        sleep(2000);
+        mecanumDrivetrain.mecanumDrive(0, 0, 0);
 
     }
 }

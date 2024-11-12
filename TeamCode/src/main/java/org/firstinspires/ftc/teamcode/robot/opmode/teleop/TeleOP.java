@@ -69,10 +69,19 @@ public class TeleOP extends OpMode
     public void loop() {
 
       //drivetrain
-      double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-      double x = gamepad1.left_stick_x;
-      double rx = -gamepad1.right_stick_x;
-      mecanumDrivetrain.mecanumDrive(x,y,rx);
+
+      if (gamepad1.left_bumper){
+          double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+          double x = gamepad1.left_stick_x;
+          double rx = -gamepad1.right_stick_x;
+          mecanumDrivetrain.mecanumDrive(x / 4, y / 4, rx / 4);
+      } else {
+          double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+          double x = gamepad1.left_stick_x;
+          double rx = -gamepad1.right_stick_x;
+          mecanumDrivetrain.mecanumDrive(x,y,rx);
+      }
+
 
       // lift
       if (gamepad2.left_stick_y > 0){
@@ -83,7 +92,7 @@ public class TeleOP extends OpMode
 
       // bakje lift
       if (gamepad2.left_bumper){
-          lift.setServoPosition(0.1);
+          lift.setServoPosition(0.15);
       }
       else {
           lift.setServoPosition(0.35);
@@ -100,9 +109,9 @@ public class TeleOP extends OpMode
 
       //Intake angle
       if (gamepad2.x){
-          intake.setIntakePosition(10);
+          intake.setIntakePosition(-30);
       }
-      if (gamepad2.y){
+      else if (gamepad2.y){
           intake.setIntakePosition(400);
       }
 
