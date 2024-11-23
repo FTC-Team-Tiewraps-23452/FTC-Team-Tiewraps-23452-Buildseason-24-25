@@ -44,11 +44,11 @@ public class Intake {
         // set the motor's zero power behavior to brake
         storeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        if (storeMotor.getCurrentPosition() < 100){
-            storeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        } else {
-            storeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        }
+//        if (storeMotor.getCurrentPosition() < 100){
+//            storeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//        } else {
+//            storeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+//        }
 
     }
 

@@ -78,12 +78,12 @@ public class TeleOP extends OpMode
           double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
           double x = gamepad1.left_stick_x;
           double rx = -gamepad1.right_stick_x;
-          mecanumDrivetrain.mecanumDrive(x / 4, y / 4, rx / 4);
+          mecanumDrivetrain.mecanumDrive(x, y, rx);
       } else {
           double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
           double x = gamepad1.left_stick_x;
           double rx = -gamepad1.right_stick_x;
-          mecanumDrivetrain.mecanumDrive(x,y,rx);
+          mecanumDrivetrain.mecanumDrive(x / 4,y / 4,rx / 4);
       }
 
 
@@ -103,9 +103,9 @@ public class TeleOP extends OpMode
       }
 
       //Intake servo
-      if (gamepad2.b) {
+      if (gamepad2.right_bumper) {
           intake.setIntakeServoSpeed(1.0);
-      } else if (gamepad2.a){
+      } else if (gamepad2.left_bumper){
           intake.setIntakeServoSpeed(-1.0);
       } else {
            intake.setIntakeServoSpeed(0.0);
