@@ -128,7 +128,7 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
          sleep(1900);
          lift.setLiftSpeed(0);
          mecanumDrivetrain.mecanumDrive(0, -0.2, 0);
-         sleep(400);
+         sleep(300);
          mecanumDrivetrain.mecanumDrive(0, 0, 0);
          lift.setServoPosition(0);
          sleep(5000);
@@ -138,7 +138,7 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
          sleep(600);
          mecanumDrivetrain.mecanumDrive(0, 0, 0);
          lift.setLiftSpeed(0.5);
-         sleep(3300);
+         sleep(2900);
          lift.setLiftSpeed(0);
      }
 
