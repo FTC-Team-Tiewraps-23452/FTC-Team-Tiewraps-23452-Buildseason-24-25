@@ -1,4 +1,4 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
+ /* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -29,20 +29,11 @@
 
 package org.firstinspires.ftc.teamcode.robot.opmode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import static com.qualcomm.hardware.rev.RevHubOrientationOnRobot.xyzOrientation;
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-
-import com.qualcomm.robotcore.hardware.IMU;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
-
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
@@ -66,7 +57,7 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
  */
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group="Linear OpMode")
-public class Autonomous extends LinearOpMode {
+public class Autonomous_park extends LinearOpMode {
 
     // Declare timer to keep track of how long the program has been running
     private final ElapsedTime runtime = new ElapsedTime();
@@ -97,7 +88,7 @@ public class Autonomous extends LinearOpMode {
 
 
 //        imu = hardwareMap.get(IMU.class, "imu");
-      
+
         mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
         intake = new Intake(hardwareMap);
         lift = new Lift(hardwareMap);
@@ -120,6 +111,9 @@ public class Autonomous extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
+        mecanumDrivetrain.mecanumDrive(0, 1, 0);
+        sleep(800);
+        mecanumDrivetrain.mecanumDrive(0, 0, 0);
 
     }
 

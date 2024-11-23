@@ -91,7 +91,7 @@ public class TeleOP extends OpMode
       }
 
       // bakje lift
-      if (gamepad2.left_bumper){
+      if (gamepad1.right_bumper){
           lift.setServoPosition(0.15);
       }
       else {
@@ -109,7 +109,7 @@ public class TeleOP extends OpMode
 
       //Intake angle
       if (gamepad2.x){
-          intake.setIntakePosition(-30);
+          intake.setIntakePosition(-40);
       }
       else if (gamepad2.y){
           intake.setIntakePosition(400);
