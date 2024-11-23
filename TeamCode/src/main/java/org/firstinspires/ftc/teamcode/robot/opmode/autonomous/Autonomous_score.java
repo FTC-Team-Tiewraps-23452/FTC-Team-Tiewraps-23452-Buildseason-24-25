@@ -56,7 +56,7 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
   * The // before @Disabled can be removed to hide the Opmode on the Driver Station
   */
 
- @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group="Linear OpMode")
+ @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous score", group="Linear OpMode")
  public class Autonomous_score extends LinearOpMode {
 
      // Declare timer to keep track of how long the program has been running
@@ -112,10 +112,13 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
          runtime.reset();
 
          mecanumDrivetrain.mecanumDrive(-1, 0, 0);
-         sleep(800);
-         mecanumDrivetrain.mecanumDrive(0.5, 0, 0);
+         sleep(950);
+         mecanumDrivetrain.mecanumDrive(0.75, 0, 0);
          sleep(200);
          mecanumDrivetrain.mecanumDrive(0, 0, 0);
+//         lift.setLiftSpeed(-1);
+//         sleep(1900);
+//         lift.setLiftSpeed(0);
      }
 
      private void drive(double driveDistance) {

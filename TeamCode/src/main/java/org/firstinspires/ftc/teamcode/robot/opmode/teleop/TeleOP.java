@@ -68,7 +68,11 @@ public class TeleOP extends OpMode
     @Override
     public void loop() {
 
-      //drivetrain
+        telemetry.addData("intake", "position" + intake.intakeValues());
+        telemetry.addData("lift", "position" + lift.liftValues());
+
+
+        //drivetrain
 
       if (gamepad1.left_bumper){
           double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
@@ -92,10 +96,10 @@ public class TeleOP extends OpMode
 
       // bakje lift
       if (gamepad1.right_bumper){
-          lift.setServoPosition(0.15);
+          lift.setServoPosition(0);
       }
       else {
-          lift.setServoPosition(0.35);
+          lift.setServoPosition(0.2);
       }
 
       //Intake servo
@@ -108,12 +112,14 @@ public class TeleOP extends OpMode
       }
 
       //Intake angle
-      if (gamepad2.x){
-          intake.setIntakePosition(-40);
-      }
-      else if (gamepad2.y){
-          intake.setIntakePosition(400);
-      }
+//      if (gamepad2.x){
+//          intake.setIntakePosition(10);
+//      }
+//      else if (gamepad2.y){
+//          intake.setIntakePosition(400);
+//      }
+
+      intake.setIntakeSpeed(gamepad2.right_stick_y / 5);
 
 
 

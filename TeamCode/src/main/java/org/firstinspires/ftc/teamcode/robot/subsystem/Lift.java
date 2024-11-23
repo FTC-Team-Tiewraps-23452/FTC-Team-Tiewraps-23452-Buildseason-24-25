@@ -27,4 +27,10 @@ public class Lift {
     public void setServoPosition(double position){
         liftServo.setPosition(position);
     }
+
+    public int liftValues(){
+        return liftMotor.getCurrentPosition();
+    }
 }
+
+

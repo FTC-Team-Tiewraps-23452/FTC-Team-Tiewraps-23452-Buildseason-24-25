@@ -21,20 +21,20 @@ public class Intake {
      *                    to link the motors and servos in the code to the motors and servos
      *                    on the actual robot
      */
-    public Intake(HardwareMap hardwareMap){
+    public Intake(HardwareMap hardwareMap) {
         /*
-        * This lines of code links the DcMotor 'myMotor' to the port on the control/expansion hub
-        * labeled "motor1"
-        * This 'labeling' can be done on the Driver Station by clicking on the three dots
-        * in the upper right corner and then going to 'Configure Robot'
+         * This lines of code links the DcMotor 'myMotor' to the port on the control/expansion hub
+         * labeled "motor1"
+         * This 'labeling' can be done on the Driver Station by clicking on the three dots
+         * in the upper right corner and then going to 'Configure Robot'
          */
         intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
         storeMotor = hardwareMap.get(DcMotor.class, "storeMotor");
 
         /*
-        * Normally a DC motors runs in the clockwise direction for positive values
-        * If positive values need to correspond to counter clockwise rotation,
-        * for example for a drivetrain, the motor can be reversed
+         * Normally a DC motors runs in the clockwise direction for positive values
+         * If positive values need to correspond to counter clockwise rotation,
+         * for example for a drivetrain, the motor can be reversed
          */
         /*
          * Tell the motors to use the integrated encoders
@@ -44,7 +44,12 @@ public class Intake {
         // set the motor's zero power behavior to brake
         storeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        storeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        if (storeMotor.getCurrentPosition() < 100){
+            storeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        } else {
+            storeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        }
+
     }
 
     //all of the following functions need to be tuned and tested
@@ -56,5 +61,13 @@ public class Intake {
         storeMotor.setTargetPosition(position);
         storeMotor.setPower(0.2);
         storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    public void setIntakeSpeed(double speed){
+        storeMotor.setPower(speed);
+    }
+
+    public int intakeValues(){
+        return storeMotor.getCurrentPosition();
     }
 }
