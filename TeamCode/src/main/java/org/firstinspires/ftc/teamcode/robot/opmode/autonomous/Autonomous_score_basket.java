@@ -30,10 +30,8 @@
 package org.firstinspires.ftc.teamcode.robot.opmode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
@@ -45,7 +43,6 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
   * The names of OpModes appear on the menu of the FTC Driver Station.
   * When a selection is made from the menu, the corresponding OpMode
   * is put on the Robot Controller and executed.
-  *
   * This particular OpMode contains a template to structure your code with subsystems.
   *
   */
@@ -67,7 +64,6 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
       * This means that we will say that certain subsystems exist and give them a name,
       * but not yet create them, this will happen in the init() function.
       */
-     private IMU imu;
      private Intake intake;
      private Lift lift;
      private MecanumDrivetrain mecanumDrivetrain;
@@ -87,19 +83,9 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
           */
 
 
- //        imu = hardwareMap.get(IMU.class, "imu");
-
          mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
          intake = new Intake(hardwareMap);
          lift = new Lift(hardwareMap);
-
- //        double xRotation = 0;
- //        double yRotation = 0;
- //        double zRotation = 0;
- //        Orientation hubRotation = xyzOrientation(xRotation, yRotation, zRotation);
- //
- //        RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(hubRotation);
- //        imu.initialize(new IMU.Parameters(orientationOnRobot));
 
          // Tell the driver that initialization is complete via the Driver Station
          telemetry.addData("Status", "Initialized");
@@ -174,20 +160,5 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
          lift.setLiftSpeed(0.5);
          sleep(2900);
          lift.setLiftSpeed(0);
-     }
-
-     private void drive(double driveDistance) {
-     }
-
-     private void rotate(double rotaionAngle) {
-         if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) != rotaionAngle) {
-             if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) < 90) {
-                 mecanumDrivetrain.mecanumDrive(0, 0, 0.5);
-             } if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) >= 90) {
-                 mecanumDrivetrain.mecanumDrive(0, 0, -0.5);
-             }
-         } else {
-             mecanumDrivetrain.mecanumDrive(0, 0, 0);
-         }
      }
  }
