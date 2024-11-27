@@ -96,19 +96,18 @@ public class Autonomous extends LinearOpMode {
          */
 
 
-//        imu = hardwareMap.get(IMU.class, "imu");
+        imu = hardwareMap.get(IMU.class, "imu");
       
         mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
         intake = new Intake(hardwareMap);
         lift = new Lift(hardwareMap);
 
-//        double xRotation = 0;
-//        double yRotation = 0;
-//        double zRotation = 0;
-//        Orientation hubRotation = xyzOrientation(xRotation, yRotation, zRotation);
-//
-//        RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(hubRotation);
-//        imu.initialize(new IMU.Parameters(orientationOnRobot));
+        RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.LEFT, RevHubOrientationOnRobot.UsbFacingDirection.UP);
+        imu.initialize(new IMU.Parameters(orientationOnRobot));
+
+        double WHEEL_CIRCUMFERENCE = 30.1593;
+        double ENCODER_RESOLUTION = 537.7;
+        double TICKS_PER_SECOND = ENCODER_RESOLUTION / WHEEL_CIRCUMFERENCE;
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -120,21 +119,24 @@ public class Autonomous extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
+        rotate(180);
+//        drive(50)
+
 
     }
 
     private void drive(double driveDistance) {
+
     }
 
     private void rotate(double rotaionAngle) {
-        if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) != rotaionAngle) {
-            if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) < 90) {
-                mecanumDrivetrain.mecanumDrive(0, 0, 0.5);
-            } if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) >= 90) {
-                mecanumDrivetrain.mecanumDrive(0, 0, -0.5);
+        imu.resetYaw();
+        while (imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES) <= rotaionAngle - 4 || imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES) >= rotaionAngle + 4 && opModeIsActive()) {
+            while (imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES) < 90 && opModeIsActive()) {
+                mecanumDrivetrain.mecanumDrive(0, 0, 0.05);
+            } while (imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES) >= 90 && opModeIsActive()) {
+                mecanumDrivetrain.mecanumDrive(0, 0, -0.05);
             }
-        } else {
-            mecanumDrivetrain.mecanumDrive(0, 0, 0);
+        }
         }
     }
-}
