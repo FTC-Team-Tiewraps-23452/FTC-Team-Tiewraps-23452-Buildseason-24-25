@@ -93,14 +93,6 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
          intake = new Intake(hardwareMap);
          lift = new Lift(hardwareMap);
 
- //        double xRotation = 0;
- //        double yRotation = 0;
- //        double zRotation = 0;
- //        Orientation hubRotation = xyzOrientation(xRotation, yRotation, zRotation);
- //
- //        RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(hubRotation);
- //        imu.initialize(new IMU.Parameters(orientationOnRobot));
-
          // Tell the driver that initialization is complete via the Driver Station
          telemetry.addData("Status", "Initialized");
          telemetry.update();
@@ -116,23 +108,5 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
          mecanumDrivetrain.mecanumDrive(0.75, 0, 0);
          sleep(200);
          mecanumDrivetrain.mecanumDrive(0, 0, 0);
-//         lift.setLiftSpeed(-1);
-//         sleep(1900);
-//         lift.setLiftSpeed(0);
-     }
-
-     private void drive(double driveDistance) {
-     }
-
-     private void rotate(double rotaionAngle) {
-         if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) != rotaionAngle) {
-             if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) < 90) {
-                 mecanumDrivetrain.mecanumDrive(0, 0, 0.5);
-             } if (imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES) >= 90) {
-                 mecanumDrivetrain.mecanumDrive(0, 0, -0.5);
-             }
-         } else {
-             mecanumDrivetrain.mecanumDrive(0, 0, 0);
-         }
      }
  }

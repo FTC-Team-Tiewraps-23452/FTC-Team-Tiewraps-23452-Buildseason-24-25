@@ -79,9 +79,40 @@ public class MecanumDrivetrain {
      */
 
     public void mecanumDrive(double x, double y, double rx){
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         leftFront.setPower((y + x + rx));
         leftBack.setPower((y - x + rx));
         rightFront.setPower((y - x - rx));
         rightBack.setPower((y + x - rx));
+    }
+
+    public void mecanumDrivePosition(int position){
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        leftFront.setTargetPosition(position);
+        leftBack.setTargetPosition(position);
+        rightFront.setTargetPosition(position);
+        rightBack.setTargetPosition(position);
+
+        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        leftFront.setPower(0.5);
+        leftBack.setPower(0.5);
+        rightFront.setPower(0.5);
+        rightBack.setPower(0.5);
+    }
+
+    public Boolean isBusy() {
+        return leftBack.isBusy() && leftFront.isBusy() && rightBack.isBusy() && rightFront.isBusy();
     }
 }

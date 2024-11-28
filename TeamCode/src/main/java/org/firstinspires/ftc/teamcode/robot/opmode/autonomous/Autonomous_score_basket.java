@@ -126,39 +126,5 @@ import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
          lift.setLiftSpeed(0.5);
          sleep(2900);
          lift.setLiftSpeed(0);
-
-//         // cycle 2
-//         mecanumDrivetrain.mecanumDrive(0, 1, 0);
-//         sleep(400);
-//         mecanumDrivetrain.mecanumDrive(0, 0, 0);
-//         mecanumDrivetrain.mecanumDrive(0, 0, 0.5);
-//         sleep(400);
-//         mecanumDrivetrain.mecanumDrive(0, 0, 0);
-//         intake.setIntakeServoSpeed(1);
-//         mecanumDrivetrain.mecanumDrive(0, 0.1, 0);
-//         sleep(200);
-//         mecanumDrivetrain.mecanumDrive(0, 0, 0);
-//         intake.setIntakeSpeed(-0.2);
-//         sleep(1200);
-//         intake.setIntakeSpeed(0);
-//         intake.setIntakeServoSpeed(-1);
-//         sleep(500);
-//         intake.setIntakeServoSpeed(0);
-//         mecanumDrivetrain.mecanumDrive(0, 0, -0.5);
-//         sleep(800);
-//         mecanumDrivetrain.mecanumDrive(0, 0, 0);
-//         mecanumDrivetrain.mecanumDrive(0, -1, 0);
-//         sleep(400);
-//         mecanumDrivetrain.mecanumDrive(0, 0, 0);
-//         lift.setLiftSpeed(-1);
-//         sleep(1900);
-//         lift.setLiftSpeed(0);
-//         lift.setServoPosition(0);
-//         sleep(5000);
-//         lift.setServoPosition(0.2);
-//         sleep(1000);
-//         lift.setLiftSpeed(0.5);
-//         sleep(2900);
-//         lift.setLiftSpeed(0);
      }
  }

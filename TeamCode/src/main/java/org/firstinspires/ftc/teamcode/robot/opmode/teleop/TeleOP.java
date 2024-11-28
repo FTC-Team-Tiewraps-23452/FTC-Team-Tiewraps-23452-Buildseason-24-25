@@ -73,7 +73,6 @@ public class TeleOP extends OpMode
 
 
         //drivetrain
-
       if (gamepad1.left_bumper){
           double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
           double x = gamepad1.left_stick_x;
@@ -111,14 +110,7 @@ public class TeleOP extends OpMode
            intake.setIntakeServoSpeed(0.0);
       }
 
-      //Intake angle
-//      if (gamepad2.x){
-//          intake.setIntakePosition(10);
-//      }
-//      else if (gamepad2.y){
-//          intake.setIntakePosition(400);
-//      }
-
+      //intake
       intake.setIntakeSpeed(gamepad2.right_stick_y / 5);
 
 

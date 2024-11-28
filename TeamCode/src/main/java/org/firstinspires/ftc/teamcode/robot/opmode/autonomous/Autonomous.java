@@ -28,21 +28,11 @@
  */
 
 package org.firstinspires.ftc.teamcode.robot.opmode.autonomous;
-
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import static com.qualcomm.hardware.rev.RevHubOrientationOnRobot.xyzOrientation;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-
 import com.qualcomm.robotcore.hardware.IMU;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
-
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
@@ -81,6 +71,10 @@ public class Autonomous extends LinearOpMode {
     private Lift lift;
     private MecanumDrivetrain mecanumDrivetrain;
 
+    double WHEEL_CIRCUMFERENCE = 30.1593;
+    double ENCODER_RESOLUTION = 537.7;
+    double TICKS_PER_CENTIMETER = ENCODER_RESOLUTION / WHEEL_CIRCUMFERENCE;
+
     @Override
     public void runOpMode() {
         /*
@@ -105,9 +99,7 @@ public class Autonomous extends LinearOpMode {
         RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.LEFT, RevHubOrientationOnRobot.UsbFacingDirection.UP);
         imu.initialize(new IMU.Parameters(orientationOnRobot));
 
-        double WHEEL_CIRCUMFERENCE = 30.1593;
-        double ENCODER_RESOLUTION = 537.7;
-        double TICKS_PER_SECOND = ENCODER_RESOLUTION / WHEEL_CIRCUMFERENCE;
+
 
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
@@ -120,12 +112,16 @@ public class Autonomous extends LinearOpMode {
         runtime.reset();
 
         rotate(180);
-//        drive(50)
+        drive(50);
 
 
     }
 
     private void drive(double driveDistance) {
+        double tick_target = driveDistance / TICKS_PER_CENTIMETER;
+        mecanumDrivetrain.mecanumDrivePosition((int)tick_target);
+        while (opModeIsActive() && mecanumDrivetrain.isBusy()) {}
+        mecanumDrivetrain.mecanumDrive(0, 0, 0);
 
     }
 

@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.robot.subsystem;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Intake {
@@ -44,23 +43,11 @@ public class Intake {
         // set the motor's zero power behavior to brake
         storeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-//        if (storeMotor.getCurrentPosition() < 100){
-//            storeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-//        } else {
-//            storeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-//        }
-
     }
 
     //all of the following functions need to be tuned and tested
     public void setIntakeServoSpeed(double speed){
         intakeServo.setPower(speed);
-    }
-
-    public void setIntakePosition(int position){
-        storeMotor.setTargetPosition(position);
-        storeMotor.setPower(0.2);
-        storeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void setIntakeSpeed(double speed){
