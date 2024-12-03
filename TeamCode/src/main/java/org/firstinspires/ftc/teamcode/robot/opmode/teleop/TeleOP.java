@@ -68,18 +68,21 @@ public class TeleOP extends OpMode
     @Override
     public void loop() {
 
-      //drivetrain
+        telemetry.addData("intake", "position" + intake.intakeValues());
+        telemetry.addData("lift", "position" + lift.liftValues());
 
+
+        //drivetrain
       if (gamepad1.left_bumper){
           double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
           double x = gamepad1.left_stick_x;
           double rx = -gamepad1.right_stick_x;
-          mecanumDrivetrain.mecanumDrive(x / 4, y / 4, rx / 4);
+          mecanumDrivetrain.mecanumDrive(x, y, rx);
       } else {
           double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
           double x = gamepad1.left_stick_x;
           double rx = -gamepad1.right_stick_x;
-          mecanumDrivetrain.mecanumDrive(x,y,rx);
+          mecanumDrivetrain.mecanumDrive(x / 4,y / 4,rx / 4);
       }
 
 
@@ -91,29 +94,24 @@ public class TeleOP extends OpMode
       }
 
       // bakje lift
-      if (gamepad2.left_bumper){
-          lift.setServoPosition(0.15);
+      if (gamepad1.right_bumper){
+          lift.setServoPosition(0);
       }
       else {
-          lift.setServoPosition(0.35);
+          lift.setServoPosition(0.2);
       }
 
       //Intake servo
-      if (gamepad2.b) {
+      if (gamepad2.right_bumper) {
           intake.setIntakeServoSpeed(1.0);
-      } else if (gamepad2.a){
+      } else if (gamepad2.left_bumper){
           intake.setIntakeServoSpeed(-1.0);
       } else {
            intake.setIntakeServoSpeed(0.0);
       }
 
-      //Intake angle
-      if (gamepad2.x){
-          intake.setIntakePosition(-30);
-      }
-      else if (gamepad2.y){
-          intake.setIntakePosition(400);
-      }
+      //intake
+      intake.setIntakeSpeed(gamepad2.right_stick_y / 5);
 
 
 

@@ -27,4 +27,16 @@ public class Lift {
     public void setServoPosition(double position){
         liftServo.setPosition(position);
     }
+
+    public void setMotorPosition(int position) {
+        liftMotor.setTargetPosition(position);
+        liftMotor.setPower(0.2);
+        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    public int liftValues(){
+        return liftMotor.getCurrentPosition();
+    }
 }
+
+
