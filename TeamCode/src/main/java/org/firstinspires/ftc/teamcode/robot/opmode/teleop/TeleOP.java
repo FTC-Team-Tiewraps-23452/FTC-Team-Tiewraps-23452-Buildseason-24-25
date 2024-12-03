@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.robot.subsystem.Climber;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Lift;
 import org.firstinspires.ftc.teamcode.robot.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.robot.subsystem.MecanumDrivetrain;
@@ -25,7 +26,7 @@ public class TeleOP extends OpMode
     private MecanumDrivetrain mecanumDrivetrain;
     private Lift lift;
     private Intake intake;
-
+    private Climber climber;
     /**
      * Code to run ONCE when the driver hits INIT
      */
@@ -41,7 +42,7 @@ public class TeleOP extends OpMode
         mecanumDrivetrain = new MecanumDrivetrain(hardwareMap);
         lift = new Lift(hardwareMap);
         intake = new Intake(hardwareMap);
-
+        climber = new Climber(hardwareMap);
         // Tell the driver that initialization is complete via the Driver Station
         telemetry.addData("Status", "Initialized");
     }
