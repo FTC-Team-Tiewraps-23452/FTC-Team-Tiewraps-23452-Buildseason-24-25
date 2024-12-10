@@ -116,6 +116,15 @@ public class TeleOP extends OpMode
           intake.setIntakePosition(400);
       }
 
+      //CLimber
+      if (gamepad2.left_trigger!=0){
+          climber.setClimberSpeed(0.2);
+      } else if (gamepad2.right_trigger!=0){
+          climber.setClimberSpeed(-0.2);
+      } else {
+          climber.setClimberSpeed(0.0);
+      }
+
 
 
         // Show the elapsed game time and wheel power.

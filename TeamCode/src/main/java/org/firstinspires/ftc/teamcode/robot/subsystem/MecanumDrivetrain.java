@@ -36,7 +36,7 @@ public class MecanumDrivetrain {
          * with the corresponding labels (deviceName)
          * This 'labeling' can be done on the Driver Station by clicking on the three dots
          * in the upper right corner and then going to 'Configure Robot'
-         */
+         * //         */
         rightFront = hardwareMap.get(DcMotor.class, "motor0");
         leftFront =  hardwareMap.get(DcMotor.class, "motor1");
         rightBack =  hardwareMap.get(DcMotor.class, "motor2");
